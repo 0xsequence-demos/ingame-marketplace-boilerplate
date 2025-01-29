@@ -6,11 +6,21 @@ import { useAccount, useDisconnect, useSwitchChain } from "wagmi";
 import { NotConnected } from "./views/NotConnected";
 import { Connected } from "./views/Connected";
 import { SequenceBoilerplate } from "boilerplate-design-system";
+import {
+  ModalProvider,
+  MarketplaceProvider,
+} from "@0xsequence/marketplace-sdk/react";
 
 export default function Layout() {
   return (
     <SequenceKit config={config}>
-      <App />
+      <MarketplaceProvider
+        config={marketplaceConfig}
+      >
+        <ModalProvider>
+          <App />
+        </ModalProvider>
+      </MarketplaceProvider>
     </SequenceKit>
   );
 }
