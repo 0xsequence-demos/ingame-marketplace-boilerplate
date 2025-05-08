@@ -1,6 +1,8 @@
 import { createConfig } from "@0xsequence/connect";
 import { chainIdFromString, chainIdsFromString } from "./utils/chainIdUtils";
+import type { SdkConfig } from "@0xsequence/marketplace-sdk";
 
+const projectId = import.meta.env.VITE_PROJECT_ID;
 const projectAccessKey = import.meta.env.VITE_PROJECT_ACCESS_KEY;
 const waasConfigKey = import.meta.env.VITE_WAAS_CONFIG_KEY;
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -28,3 +30,13 @@ export const config: any = createConfig("waas", {
   appleRedirectURI: appleRedirectURI,
   walletConnectProjectId: walletConnectId,
 });
+
+export function getConfig() {
+  const config = {
+    projectId,
+    projectAccessKey,
+    walletConnectProjectId: walletConnectId,
+  } satisfies SdkConfig;
+
+  return config;
+}

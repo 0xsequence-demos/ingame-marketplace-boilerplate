@@ -6,9 +6,15 @@ import TestSendTransaction from "../components/TestSendTransaction";
 
 import { Group, Card } from "@0xsequence-demos/boilerplate-design-system";
 import { TestLinkWallet } from "../components/TestLinkWallet";
+import { Collections } from "../components/Collections";
+import { MarketplaceCollection } from "@0xsequence/marketplace-sdk";
 
 export function Connected() {
   const { address, chain, chainId } = useAccount();
+
+  function onSelectCollection(value: MarketplaceCollection) {
+    void value;
+  }
 
   if (!address || !chain || !chainId) {
     return (
@@ -34,6 +40,9 @@ export function Connected() {
 
   return (
     <div className="flex flex-col gap-8">
+      <div>
+        <Collections onSelectCollection={onSelectCollection} />
+      </div>
       <Group>
         <Card
           collapsable
