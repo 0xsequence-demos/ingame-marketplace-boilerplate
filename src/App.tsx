@@ -18,8 +18,8 @@ function App() {
   const { isConnected } = useAccount();
   return (
     <SequenceBoilerplate
-      githubUrl="https://github.com/0xsequence-demos/kit-embedded-wallet-react-boilerplate"
-      name="Sequence Web SDK Starter - React"
+      githubUrl="https://github.com/0xsequence-demos/ingame-marketplace-boilerplate"
+      name="Sequence In-Game Marketplace Boilerplate"
       description="Embedded Wallet"
       wagmi={{ useAccount, useDisconnect, useSwitchChain }}
     >

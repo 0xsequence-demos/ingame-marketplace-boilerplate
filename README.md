@@ -1,6 +1,8 @@
-# Sequence WebSDK Embedded Wallet React Starter Boilerplate
+# Sequence Kit In-Game Marketplace Boilerplate
 
-Starter Sequence Embedded Wallet boilerplate that uses [Sequence WebSDK](https://github.com/0xsequence/web-sdk) with React.
+## Coming Soon!
+
+Starter Sequence boilerplate demonstrating how to build an in-game NFT marketplate using Sequence.
 
 ## Quickstart
 
