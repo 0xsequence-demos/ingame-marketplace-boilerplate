@@ -1,19 +1,22 @@
 import { useAccount } from "wagmi";
 
-import TestSignMessage from "../components/TestSignMessage";
-import TestVerifyMessage from "../components/TestVerifyMessage";
-import TestSendTransaction from "../components/TestSendTransaction";
-
 import { Group, Card } from "@0xsequence-demos/boilerplate-design-system";
-import { TestLinkWallet } from "../components/TestLinkWallet";
 import { Collections } from "../components/Collections";
 import { MarketplaceCollection } from "@0xsequence/marketplace-sdk";
+import { useState } from "react";
+import { Collectibles } from "../components/Collectibles";
+import { Address } from "viem";
+import { UserInventory } from "../components/UserInventory";
 
 export function Connected() {
   const { address, chain, chainId } = useAccount();
-
+  const [collectionSelected, setCollectionSelected] =
+    useState<MarketplaceCollection | null>(null);
   function onSelectCollection(value: MarketplaceCollection) {
-    void value;
+    setCollectionSelected(value);
+  }
+  function onRestartSelectedCollectionValue() {
+    setCollectionSelected(null);
   }
 
   if (!address || !chain || !chainId) {
@@ -41,37 +44,27 @@ export function Connected() {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <Collections onSelectCollection={onSelectCollection} />
+        {!collectionSelected ? (
+          <Collections onSelectCollection={onSelectCollection} />
+        ) : (
+          <div className="flex flex-col gap-4">
+            <button
+              className="mx-auto py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
+              onClick={onRestartSelectedCollectionValue}
+            >
+              Show Collections
+            </button>
+            <UserInventory
+              chainId={collectionSelected.chainId}
+              collectionId={collectionSelected.address as Address}
+            />
+            <Collectibles
+              chainId={collectionSelected.chainId}
+              collectionId={collectionSelected.address as Address}
+            />
+          </div>
+        )}
       </div>
-      <Group>
-        <Card
-          collapsable
-          title="Sign message"
-          data-id="sign-message"
-          className="bg-white/10 border border-white/10 backdrop-blur-sm"
-        >
-          <TestSignMessage />
-        </Card>
-
-        <Card
-          collapsable
-          title="Verify message"
-          data-id="verify-message"
-          className="bg-white/10 border border-white/10 backdrop-blur-sm"
-        >
-          <TestVerifyMessage chainId={chainId} />
-        </Card>
-
-        <Card
-          collapsable
-          title="Send transaction"
-          data-id="send-transaction"
-          className="bg-white/10 border border-white/10 backdrop-blur-sm"
-        >
-          <TestSendTransaction chainId={chainId} />
-        </Card>
-      </Group>
-      <TestLinkWallet />
     </div>
   );
 }

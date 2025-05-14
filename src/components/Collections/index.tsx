@@ -10,6 +10,7 @@ export const Collections = ({
   const { data } = useMarketplaceConfig();
 
   const collections: MarketplaceCollection[] = data?.collections || [];
+
   return (
     <div>
       {collections?.map((collection) => (
