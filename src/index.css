@@ -1,7 +1,7 @@
-@import "tailwindcss";
+/* @import "tailwindcss"; */
+@import "@0xsequence/marketplace-sdk/styles/preset";
 @import "@0xsequence-demos/boilerplate-design-system/styles/index.css";
 @source "../node_modules/@0xsequence-demos/boilerplate-design-system";
-@import "@0xsequence/marketplace-sdk/styles/preset";
 /* @import '@0xsequence/design-system/preset'; */
 
 /*
