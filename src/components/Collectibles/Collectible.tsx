@@ -86,7 +86,7 @@ export const Collectible = ({
               className="py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
               onClick={onClickBuy}
             >
-              Buy now for {collectible.order.priceAmountFormatted}{" "}
+              Buy Now for {collectible.order.priceAmountFormatted}{" "}
               {priceCurrencyData?.symbol || "unknown"}
             </button>
           )}
@@ -94,7 +94,7 @@ export const Collectible = ({
             className="py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
             onClick={onClickOffer}
           >
-            Make offer
+            Offer To Buy
           </button>
         </div>
       )}

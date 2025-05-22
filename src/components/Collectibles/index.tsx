@@ -67,7 +67,7 @@ export const Collectibles = ({
 
   return (
     <div>
-      <h1 className="text-[32px] font-semibold">Collectibles</h1>
+      <h1 className="text-[32px] font-semibold">Marketplace Items</h1>
       <div className="flex flex-wrap gap-6">
         {/* Agregar tab para inventario del usuario. */}
         {collectiblesFlat?.map((collectible) => (

@@ -63,7 +63,7 @@ export const UserInventory = ({
 
   return (
     <div>
-      <h1 className="text-[32px] font-semibold">Inventory</h1>
+      <h1 className="text-[32px] font-semibold">Your Items</h1>
       <div className="flex flex-wrap gap-6">
         {collectiblesFlat?.map((collectible) => (
           <UserInventoryCollectible

@@ -106,7 +106,7 @@ export const UserInventoryCollectible = ({
               className="py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
               onClick={onClickList}
             >
-              List
+              List for Sale
             </button>
           )}
           {!sellDisabled && (
@@ -114,7 +114,7 @@ export const UserInventoryCollectible = ({
               className="py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
               onClick={onAcceptOffer}
             >
-              Sell now for {collectible.offer?.priceAmountFormatted}{" "}
+              Sell Now for {collectible.offer?.priceAmountFormatted}{" "}
               {offerPriceCurrencyData?.symbol || "unknown"}
             </button>
           )}
