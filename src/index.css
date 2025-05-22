@@ -1,6 +1,8 @@
-@import "tailwindcss";
-@import "boilerplate-design-system/styles/index.css";
-@source "../node_modules/boilerplate-design-system";
+/* @import "tailwindcss"; */
+@import "@0xsequence/marketplace-sdk/styles/preset";
+@import "@0xsequence-demos/boilerplate-design-system/styles/index.css";
+@source "../node_modules/@0xsequence-demos/boilerplate-design-system";
+/* @import '@0xsequence/design-system/preset'; */
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -18,4 +20,9 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+}
+
+@theme {
+  --color-violetgradient: linear-gradient(270deg, #7537f9, #5826ff);
+  --font-script: Great Vibes, cursive;
 }
