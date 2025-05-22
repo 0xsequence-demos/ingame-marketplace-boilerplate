@@ -54,6 +54,18 @@ export function Connected() {
             >
               Show Collections
             </button>
+            <div className="text-20">
+              Use{" "}
+              <a
+                href="https://faucet.circle.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600"
+              >
+                this faucet
+              </a>{" "}
+              to get USDC to use in this demo
+            </div>
             <UserInventory
               chainId={collectionSelected.chainId}
               collectionId={collectionSelected.address as Address}
