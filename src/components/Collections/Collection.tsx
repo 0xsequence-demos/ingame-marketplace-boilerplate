@@ -35,7 +35,7 @@ export const Collection = ({
     >
       {image ? (
         <Image
-          className=" w-full max-w-[28rem] mx-auto aspect-square rounded-lg"
+          className=" w-full max-w-[28rem] mx-auto aspect-square rounded-lg object-cover"
           src={image}
         />
       ) : (
