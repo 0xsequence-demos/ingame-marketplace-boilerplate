@@ -35,6 +35,7 @@ function App() {
       githubUrl="https://github.com/0xsequence-demos/ingame-marketplace-boilerplate"
       name="Sequence In-Game Marketplace Boilerplate"
       description="Embedded Wallet"
+      faucetUrl="https://www.alchemy.com/faucets/arbitrum-sepolia"
       wagmi={{ useAccount, useDisconnect, useSwitchChain }}
     >
       {isConnected ? <Connected /> : <NotConnected />}
