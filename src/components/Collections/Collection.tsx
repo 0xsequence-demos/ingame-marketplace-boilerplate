@@ -1,7 +1,7 @@
 import { Image } from "@0xsequence-demos/boilerplate-design-system";
 import {
   getPresentableChainName,
-  type MarketplaceCollection,
+  MarketCollection,
 } from "@0xsequence/marketplace-sdk";
 import { useCollection } from "@0xsequence/marketplace-sdk/react";
 import { truncateText } from "../../utils/helpers";
@@ -10,12 +10,12 @@ export const Collection = ({
   collection,
   onSelectCollection,
 }: {
-  collection: MarketplaceCollection;
-  onSelectCollection: (value: MarketplaceCollection) => void;
+  collection: MarketCollection;
+  onSelectCollection: (value: MarketCollection) => void;
 }) => {
   const { data } = useCollection({
     chainId: collection.chainId,
-    collectionAddress: collection.address,
+    collectionAddress: collection.itemsAddress,
   });
 
   const logoURI = data?.logoURI;
@@ -39,7 +39,7 @@ export const Collection = ({
           src={image}
         />
       ) : (
-        <div className="w-full max-w-[28rem] mx-auto aspect-square rounded-[0.5rem] bg-grey-800 rounded-lg"></div>
+        <div className="w-full max-w-[28rem] mx-auto aspect-square bg-grey-800 rounded-lg"></div>
       )}
 
       <div className="flex flex-col gap-4 pt-4">
@@ -47,11 +47,9 @@ export const Collection = ({
           <p className="text-20 font-bold leading-tight">
             {truncateText(name || "", 25)}
           </p>
-          <p className="font-bold font-normal">
-            {truncateText(description || "", 35)}
-          </p>
-          <p className="text-xs font-bold font-normal">
-            Address: {collection.address}
+          <p className="font-bold">{truncateText(description || "", 35)}</p>
+          <p className="text-xs font-bold">
+            Address: {collection.itemsAddress}
           </p>
         </div>
 

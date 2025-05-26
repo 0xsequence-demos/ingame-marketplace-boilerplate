@@ -2,17 +2,17 @@ import { useAccount } from "wagmi";
 
 import { Group, Card } from "@0xsequence-demos/boilerplate-design-system";
 import { Collections } from "../components/Collections";
-import { MarketplaceCollection } from "@0xsequence/marketplace-sdk";
 import { useState } from "react";
 import { Collectibles } from "../components/Collectibles";
 import { Address } from "viem";
 import { UserInventory } from "../components/UserInventory";
+import { MarketCollection } from "@0xsequence/marketplace-sdk";
 
 export function Connected() {
   const { address, chain, chainId } = useAccount();
   const [collectionSelected, setCollectionSelected] =
-    useState<MarketplaceCollection | null>(null);
-  function onSelectCollection(value: MarketplaceCollection) {
+    useState<MarketCollection | null>(null);
+  function onSelectCollection(value: MarketCollection) {
     setCollectionSelected(value);
   }
   function onRestartSelectedCollectionValue() {
@@ -52,7 +52,7 @@ export function Connected() {
               className="mx-auto py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
               onClick={onRestartSelectedCollectionValue}
             >
-              Show Collections
+              Back to Collections
             </button>
             <div className="text-20">
               Use{" "}
@@ -68,11 +68,11 @@ export function Connected() {
             </div>
             <UserInventory
               chainId={collectionSelected.chainId}
-              collectionId={collectionSelected.address as Address}
+              collectionId={collectionSelected.itemsAddress as Address}
             />
             <Collectibles
               chainId={collectionSelected.chainId}
-              collectionId={collectionSelected.address as Address}
+              collectionId={collectionSelected.itemsAddress as Address}
             />
           </div>
         )}

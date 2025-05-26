@@ -1,9 +1,9 @@
 import { OrderbookKind, OrderSide } from "@0xsequence/marketplace-sdk";
 import {
   useBuyModal,
-  useCurrencies,
   useListCollectibles,
   useMakeOfferModal,
+  useMarketCurrencies,
   useMarketplaceConfig,
 } from "@0xsequence/marketplace-sdk/react";
 import { Collectible } from "./Collectible";
@@ -50,16 +50,16 @@ export const Collectibles = ({
   const collectiblesFlat =
     collectibles?.pages.flatMap((p) => p.collectibles) ?? [];
   const collectionData =
-    data?.collections?.find(
-      (collection) => collection.address === collectionId,
+    data?.market.collections?.find(
+      (collection) => collection.itemsAddress === collectionId,
     ) || null;
 
-  const { data: currenciesData } = useCurrencies({
+  const { data: currenciesData } = useMarketCurrencies({
     chainId: collectionData!.chainId,
-    collectionAddress: collectionData!.address,
+    collectionAddress: collectionData!.itemsAddress as `0x${string}`,
     includeNativeCurrency: true,
     query: {
-      enabled: !!collectionData?.chainId && !!collectionData?.address,
+      enabled: !!collectionData?.chainId && !!collectionData?.itemsAddress,
     },
   });
   const orderbookKind: OrderbookKind =

@@ -62,7 +62,7 @@ export const Collectible = ({
           src={image}
         />
       ) : (
-        <div className="w-full max-w-[28rem] mx-auto aspect-square rounded-[0.5rem] bg-grey-800 rounded-lg"></div>
+        <div className="w-full max-w-[28rem] mx-auto aspect-square bg-grey-800 rounded-lg"></div>
       )}
 
       <div className="flex flex-col gap-4 pt-4">
