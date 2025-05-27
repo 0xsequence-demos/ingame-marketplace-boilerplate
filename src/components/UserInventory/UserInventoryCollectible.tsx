@@ -1,4 +1,3 @@
-import { Image } from "@0xsequence-demos/boilerplate-design-system";
 import type {
   CurrencyData,
   ShowCreateListingModalArgs,
@@ -10,6 +9,8 @@ import type {
 } from "@0xsequence/marketplace-sdk";
 import { useBalanceOfCollectible } from "@0xsequence/marketplace-sdk/react";
 import type { Address } from "viem";
+import { CollectibleBase } from "../common/CollectibleBase";
+import { ButtonStandard } from "../common/ButtonStandard";
 
 export const UserInventoryCollectible = ({
   collectible,
@@ -44,7 +45,7 @@ export const UserInventoryCollectible = ({
     },
   });
 
-  const tokenBalance = userBalanceResp?.balance;
+  const tokenBalance = parseInt(userBalanceResp?.balance || "0");
 
   const onClickList = () => {
     showListModal({
@@ -69,57 +70,25 @@ export const UserInventoryCollectible = ({
   const showActionButtons = address && isConnected;
 
   return (
-    <div className="flex flex-col w-[350px] px-3 py-3 border border-transparent bg-[#14062a] text-left rounded-[1rem] overflow-clip">
-      {image ? (
-        <Image
-          className=" w-full max-w-[28rem] mx-auto aspect-square rounded-lg"
-          src={image}
-        />
-      ) : (
-        <div className="w-full max-w-[28rem] mx-auto aspect-square rounded-[0.5rem] bg-grey-800 rounded-lg"></div>
-      )}
-
-      <div className="flex flex-col gap-4 pt-4">
-        <div className="flex flex-col gap-1 px-4">
-          <span className="text-20 font-bold leading-tight">{name || ""}</span>
-        </div>
-
-        <dl className="flex justify-between gap-4 border-t border-grey-800 px-6 py-3">
-          <div className="flex flex-col">
-            <dt className="text-11 font-medium text-grey-200 leading-[1em]">
-              Token Id
-            </dt>
-            <dd className="text-white font-bold text-14">{tokenId || ""}</dd>
-          </div>
-          <div className="flex flex-col text-end items-end">
-            <dt className="text-11 font-medium text-grey-200 leading-[1em]">
-              Owned
-            </dt>
-            <dd className="text-white font-bold text-14">{tokenBalance}</dd>
-          </div>
-        </dl>
-      </div>
+    <CollectibleBase
+      name={name}
+      tokenId={tokenId}
+      imageUrl={image}
+      tokenBalance={tokenBalance}
+    >
       {showActionButtons && (
         <div className="flex flex-col gap-2">
           {tokenBalance && (
-            <button
-              className="py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
-              onClick={onClickList}
-            >
-              List for Sale
-            </button>
+            <ButtonStandard onClick={onClickList}>List for Sale</ButtonStandard>
           )}
           {!sellDisabled && (
-            <button
-              className="py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
-              onClick={onAcceptOffer}
-            >
+            <ButtonStandard onClick={onAcceptOffer}>
               Sell Now for {collectible.offer?.priceAmountFormatted}{" "}
               {offerPriceCurrencyData?.symbol || "unknown"}
-            </button>
+            </ButtonStandard>
           )}
         </div>
       )}
-    </div>
+    </CollectibleBase>
   );
 };
