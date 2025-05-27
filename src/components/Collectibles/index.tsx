@@ -18,17 +18,18 @@ export const Collectibles = ({
   chainId: number;
 }) => {
   const { address, isConnected } = useAccount();
-  const { data: collectibles } = useListCollectibles({
-    chainId: Number(chainId),
-    collectionAddress: collectionId,
-    filter: {
-      // # Optional filters
-      includeEmpty: true,
-      // searchText: text,
-      // properties,
-    },
-    side: OrderSide.listing,
-  });
+  const { data: collectibles, refetch: refetchCollectibles } =
+    useListCollectibles({
+      chainId: Number(chainId),
+      collectionAddress: collectionId,
+      filter: {
+        // # Optional filters
+        includeEmpty: true,
+        // searchText: text,
+        // properties,
+      },
+      side: OrderSide.listing,
+    });
 
   const { data } = useMarketplaceConfig();
 
@@ -36,10 +37,16 @@ export const Collectibles = ({
     console.error(error.message);
   };
 
+  const showBuyModalOnSuccess = ({ hash }: { hash?: `0x${string}` }) => {
+    console.log("Buy transaction sent with hash: ", hash);
+    if (hash)
+      setTimeout(() => {
+        refetchCollectibles();
+      }, 3000);
+  };
+
   const { show: showBuyModal } = useBuyModal({
-    onSuccess(hash) {
-      console.log("Buy transaction sent with hash: ", hash);
-    },
+    onSuccess: showBuyModalOnSuccess,
     onError,
   });
 

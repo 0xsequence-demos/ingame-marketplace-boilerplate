@@ -18,21 +18,22 @@ export const UserInventory = ({
   chainId: number;
 }) => {
   const { address, isConnected } = useAccount();
-  const { data: collectibles } = useListCollectibles({
-    chainId: Number(chainId),
-    collectionAddress: collectionId,
-    filter: {
-      // # Optional filters
-      includeEmpty: true,
-      inAccounts: [address!],
-      // searchText: text,
-      // properties,
-    },
-    side: OrderSide.listing,
-    query: {
-      enabled: !!address,
-    },
-  });
+  const { data: collectibles, refetch: refetchCollectibles } =
+    useListCollectibles({
+      chainId: Number(chainId),
+      collectionAddress: collectionId,
+      filter: {
+        // # Optional filters
+        includeEmpty: true,
+        inAccounts: [address!],
+        // searchText: text,
+        // properties,
+      },
+      side: OrderSide.listing,
+      query: {
+        enabled: !!address,
+      },
+    });
 
   const { data } = useMarketplaceConfig();
 
@@ -40,8 +41,18 @@ export const UserInventory = ({
     console.error(error.message);
   };
 
+  const showSellModalOnSuccess = ({ hash }: { hash?: `0x${string}` }) => {
+    if (hash)
+      setTimeout(() => {
+        refetchCollectibles();
+      }, 3000);
+  };
+
   const { show: showListModal } = useCreateListingModal({ onError });
-  const { show: showSellModal } = useSellModal({ onError });
+  const { show: showSellModal } = useSellModal({
+    onError,
+    onSuccess: showSellModalOnSuccess,
+  });
 
   const collectiblesFlat =
     collectibles?.pages.flatMap((p) => p.collectibles) ?? [];

@@ -10,7 +10,7 @@ import {
   MarketplaceProvider,
   ModalProvider,
 } from "@0xsequence/marketplace-sdk/react";
-
+import { SequenceCheckoutProvider } from "@0xsequence/checkout";
 const sdkConfig = getConfig();
 
 export default function Layout() {
@@ -18,10 +18,12 @@ export default function Layout() {
     <ThemeProvider>
       <ToastProvider>
         <SequenceConnect config={config}>
-          <MarketplaceProvider config={sdkConfig}>
-            <App />
-            <ModalProvider />
-          </MarketplaceProvider>
+          <SequenceCheckoutProvider>
+            <MarketplaceProvider config={sdkConfig}>
+              <App />
+              <ModalProvider />
+            </MarketplaceProvider>
+          </SequenceCheckoutProvider>
         </SequenceConnect>
       </ToastProvider>
     </ThemeProvider>
