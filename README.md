@@ -1,8 +1,8 @@
-# Sequence Kit In-Game Marketplace Boilerplate
+# Sequence Marketplace Hooks Boilerplate
 
 ## Coming Soon!
 
-Starter Sequence boilerplate demonstrating how to build an in-game NFT marketplate using Sequence.
+Starter Sequence boilerplate demonstrating how to build a custom NFT marketplace using Sequence's Marketplace SDK hooks.
 
 ## Quickstart
 

@@ -1,14 +1,23 @@
 import { useAccount } from "wagmi";
 
-import TestSignMessage from "../components/TestSignMessage";
-import TestVerifyMessage from "../components/TestVerifyMessage";
-import TestSendTransaction from "../components/TestSendTransaction";
-
-import { Group, Card } from "boilerplate-design-system";
-import { TestLinkWallet } from "../components/TestLinkWallet";
+import { Group, Card } from "@0xsequence-demos/boilerplate-design-system";
+import { Collections } from "../components/Collections";
+import { useState } from "react";
+import { Collectibles } from "../components/Collectibles";
+import { Address } from "viem";
+import { UserInventory } from "../components/UserInventory";
+import { MarketCollection } from "@0xsequence/marketplace-sdk";
 
 export function Connected() {
   const { address, chain, chainId } = useAccount();
+  const [collectionSelected, setCollectionSelected] =
+    useState<MarketCollection | null>(null);
+  function onSelectCollection(value: MarketCollection) {
+    setCollectionSelected(value);
+  }
+  function onRestartSelectedCollectionValue() {
+    setCollectionSelected(null);
+  }
 
   if (!address || !chain || !chainId) {
     return (
@@ -34,35 +43,40 @@ export function Connected() {
 
   return (
     <div className="flex flex-col gap-8">
-      <Group>
-        <Card
-          collapsable
-          title="Sign message"
-          data-id="sign-message"
-          className="bg-white/10 border border-white/10 backdrop-blur-sm"
-        >
-          <TestSignMessage />
-        </Card>
-
-        <Card
-          collapsable
-          title="Verify message"
-          data-id="verify-message"
-          className="bg-white/10 border border-white/10 backdrop-blur-sm"
-        >
-          <TestVerifyMessage chainId={chainId} />
-        </Card>
-
-        <Card
-          collapsable
-          title="Send transaction"
-          data-id="send-transaction"
-          className="bg-white/10 border border-white/10 backdrop-blur-sm"
-        >
-          <TestSendTransaction chainId={chainId} />
-        </Card>
-      </Group>
-      <TestLinkWallet />
+      <div>
+        {!collectionSelected ? (
+          <Collections onSelectCollection={onSelectCollection} />
+        ) : (
+          <div className="flex flex-col gap-4">
+            <button
+              className="mx-auto py-3 px-3 border border-transparent bg-[linear-gradient(to_left,_#7537f9,_#5826ff)] rounded-[0.5rem] min-w-[50px] font-bold text-14 cursor-pointer"
+              onClick={onRestartSelectedCollectionValue}
+            >
+              Back to Collections
+            </button>
+            <div className="text-20">
+              Use{" "}
+              <a
+                href="https://faucet.circle.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600"
+              >
+                this faucet
+              </a>{" "}
+              to get USDC to use in this demo
+            </div>
+            <UserInventory
+              chainId={collectionSelected.chainId}
+              collectionId={collectionSelected.itemsAddress as Address}
+            />
+            <Collectibles
+              chainId={collectionSelected.chainId}
+              collectionId={collectionSelected.itemsAddress as Address}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
